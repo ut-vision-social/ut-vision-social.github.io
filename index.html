@@ -280,8 +280,8 @@ footer p { margin: 0; }
           </header>
           <figure class="fig"><img src="images/2026-social-interaction.webp" alt="Overview of multi-speaker attention alignment, linking each speaker's visual tokens to their utterances inside an MLLM" loading="lazy" width="1200" height="602"></figure>
           <div class="body">
-            <p class="sum">In multi-speaker scenes, MLLMs struggle to associate each person's appearance with what they say. We identify the attention heads responsible for cross-modal grounding and inject a social-aware attention bias derived from speaker locations, without any additional training.</p>
-            <p class="finding"><mark>State of the art</mark> on four social tasks across TVQA+, MMSI, and OnlineMMSI, with LLaVA-NeXT-Video, Qwen2.5-VL, and InternVL3.</p>
+            <p class="sum">Adding video to an MLLM gives surprisingly inconsistent gains on social tasks. We locate the attention heads responsible for cross-modal grounding and inject a social-aware attention bias derived from speaker locations, with no trainable parameters, in LLaVA-NeXT-Video, Qwen2.5-VL, and InternVL3.</p>
+            <p class="finding"><mark>The weak link is alignment.</mark> In multi-speaker scenes, a speaker’s visual tokens and their words barely attend to each other; restoring that alignment sets state of the art on four social tasks.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2511.17952">Paper</a>
               <a href="https://github.com/ut-vision/SocialInteraction">Code</a>
@@ -298,7 +298,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-read-the-room.webp" alt="MIDA overview: Werewolf game clips labelled NEUTRAL, FALSE, and TRUE, the annotation pipeline, evaluated MLLMs, and the SoCoT and DSEM modules" loading="lazy" width="1200" height="574"></figure>
           <div class="body">
             <p class="sum">MIDA asks whether each statement in a game of One Night Ultimate Werewolf is true, false, or neutral, with ground truth reconstructed from manually annotated night actions. We benchmark 12 MLLMs and introduce Social Chain-of-Thought reasoning with a Dynamic Social Epistemic Memory.</p>
-            <p class="finding"><mark>2,360 statements</mark> with verifiable labels; even GPT-4o struggles to separate truth from deception.</p>
+            <p class="finding"><mark>Even GPT-4o cannot reliably separate truth from deception.</mark> Models struggle to track what each player knows, and adding structured epistemic memory consistently helps.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2511.16221">Paper</a>
               <a href="https://github.com/kkkcx/Can-MLLMs-Read-the-Room">Code</a>
@@ -316,7 +316,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-mm-ocean.webp" alt="MM-OCEAN overview: grounded personality reasoning through rating, reasoning, and grounding" loading="lazy" width="1200" height="725"></figure>
           <div class="body">
             <p class="sum">Grounded Personality Reasoning requires a model to support each Big Five rating with observable behaviour. MM-OCEAN provides 1,104 videos and 5,320 cue-grounding questions, and a three-tier evaluation of 27 MLLMs.</p>
-            <p class="finding"><mark>51% of correct ratings</mark> are not grounded in any retrieved behavioural cue.</p>
+            <p class="finding"><mark>The Prejudice Gap.</mark> 51% of correct ratings are not grounded in retrieved behavioural cues, so models often reach the right score for the wrong reason.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2605.22109">Paper</a>
               <a href="https://github.com/kkkcx/MM-OCEAN">Code</a>
@@ -332,7 +332,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-honeyed-words.webp" alt="Overview of ZhenhuanBench and CPR-GRPO: building the benchmark from Empresses in the Palace, an example line with its honeyed words and hidden dagger, and the Compress, Probe, Replenish training loop" loading="lazy" width="1400" height="875"></figure>
           <div class="body">
             <p class="sum">Mock politeness is polite in form but hostile in function. ZhenhuanBench turns 47 hours of expert commentary on <i>Empresses in the Palace</i> into 1,592 questions on speaker intent, emotion–language mismatch, and how each listener takes a remark. CPR-GRPO, a Compress–Probe–Replenish loop, reuses the same annotations to train an 8B model.</p>
-            <p class="finding"><mark>34 LLMs evaluated.</mark> The strongest reaches 73.48% overall but only 58.37% on how listeners react.</p>
+            <p class="finding"><mark>Reading the listeners is the hardest part.</mark> The best of 34 LLMs scores 73.48% overall but 58.37% on how listeners react; with only 338 gold traces, CPR-GRPO brings an 8B model to 67.0 on the multiple-choice tasks.</p>
             <div class="links"><span>Paper soon</span></div>
           </div>
         </article>
@@ -358,7 +358,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-social-director.webp" alt="SocialDirector controls who does what, toward whom, and when in generated multi-person videos" loading="lazy" width="1200" height="693"></figure>
           <div class="body">
             <p class="sum">Video generators often assign an action to the wrong person or direct it at the wrong target. Social Actor Masking binds each person to their own description, and Directional Reweighting steers each action toward its intended target, both by modulating cross-attention.</p>
-            <p class="finding"><mark>Training-free control</mark> of who acts, toward whom, and when, across several video generation models.</p>
+            <p class="finding"><mark>Close to real footage.</mark> Across different video generators, SocialDirector markedly improves interaction fidelity and approaches the upper bound set by real videos.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2605.10079">Paper</a>
               <span>Code soon</span>
@@ -374,8 +374,8 @@ footer p { margin: 0; }
           </header>
           <figure class="fig"><img src="images/2026-helloworld.webp" alt="HelloWorld: pressing a button makes the on-screen character turn toward the viewer and greet them" loading="lazy" width="1200" height="480"></figure>
           <div class="body">
-            <p class="sum">A video world model with characters that respond to the viewer. At the press of a button, the on-screen character turns to the camera, waves, nods, or greets the viewer, while the camera continues to follow user control.</p>
-            <p class="finding"><mark>HelloWorldBench</mark>, 400 samples scored on three social interaction metrics and three visual quality metrics.</p>
+            <p class="sum">A video world model whose characters respond to the viewer: at the press of a button, the on-screen character turns to the camera, waves, nods, or says hello. Self-distillation on clips the model generates itself adds camera control, and HelloWorldBench (400 samples) measures both social and visual quality.</p>
+            <p class="finding"><mark>Interaction without a trade-off.</mark> HelloWorld outperforms baselines on interaction quality while keeping state-of-the-art picture aesthetics and camera-pose following.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2608.05070">Paper</a>
               <a href="https://github.com/AlayaLab/HelloWorld">Project page</a>
@@ -403,8 +403,8 @@ footer p { margin: 0; }
           </header>
           <figure class="fig"><img src="images/2026-social-agent.webp" alt="HICO-Bench example: assuming what Maya needs fails, while clarifying first leads to a verified plan in both possible worlds" loading="lazy" width="1200" height="523"></figure>
           <div class="body">
-            <p class="sum">HICO-Bench pairs two agents holding private information across 180 everyday coordination scenarios and verifies whether the plan they agree on actually works. Paired-Credit Policy Optimization learns from these verified outcomes turn by turn.</p>
-            <p class="finding"><mark>36% of conversations</mark> rated highly for goal completion still fail verification; PaCPO lifts Qwen3-8B from 20.4% to 28.3%.</p>
+            <p class="sum">HICO-Bench pairs two agents holding private information across 180 everyday coordination scenarios and verifies whether the plan they agree on actually works. Paired-Credit Policy Optimization learns from these verified outcomes turn by turn, raising Qwen3-8B’s Verified Success from 20.4% to 28.3%.</p>
+            <p class="finding"><mark>Sounding helpful is not the same as helping.</mark> Across 13 LLMs, 36% of conversations rated highly for goal completion end in a plan that fails verification.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2610.20195">Paper</a>
             </div>
@@ -420,7 +420,7 @@ footer p { margin: 0; }
       <div class="contact-card">
         <div>
           <h2>Pull up a chair</h2>
-          <p>We welcome questions about these projects, research collaborations, and students interested in social intelligence. Please get in touch with either of us.</p>
+          <p>Questions about these projects and ideas for collaboration are always welcome. Feel free to reach out to either of us.</p>
         </div>
         <div class="people">
           <div class="person">
