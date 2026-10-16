@@ -178,27 +178,24 @@ a { color: inherit; }
 
 .papers { display: grid; gap: 20px; }
 .paper {
-  display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px;
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-areas: "head head" "fig body";
+  gap: 20px 34px; align-items: center;
   padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
   scroll-margin-top: 24px; transition: border-color .2s;
 }
 .paper:hover { border-color: color-mix(in srgb, var(--ink) 30%, var(--line)); }
 .paper:target { border-color: var(--ink); }
-/* The paper's own figure runs the full card width on a soft mat, large enough to read;
-   the text sits underneath in two columns, so no column is ever left half empty. */
-.fig {
-  margin: 0; display: flex; align-items: center; justify-content: center;
-  padding: clamp(10px, 2.4vw, 26px); border-radius: var(--r-inner); background: var(--sunk);
-}
-.fig img { max-width: 940px; }
+/* The figure sits beside the text, centred on the text block's height, with no mat
+   behind it, so any difference in height reads as even margin rather than an empty box. */
+.head { grid-area: head; display: flex; flex-direction: column; gap: 8px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.fig { grid-area: fig; margin: 0; align-self: center; }
 .fig img {
-  width: 100%; height: auto; display: block; background: #fff;
-  border-radius: 8px; padding: 6px; box-shadow: 0 1px 0 var(--line), 0 6px 18px -10px rgba(27, 33, 55, .35);
+  width: 100%; height: auto; display: block; background: #fff; padding: 6px;
+  border-radius: var(--r-inner); border: 1px solid var(--line);
+  box-shadow: 0 10px 24px -16px rgba(27, 33, 55, .45);
 }
 
-.body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 18px 40px; padding: 0 6px 4px; }
-.ident, .story { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-.story { padding-top: 34px; }
+.body { grid-area: body; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .meta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
 .venue {
   font-family: var(--display); font-weight: 700; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase;
@@ -211,7 +208,7 @@ a { color: inherit; }
 .venue.open { color: var(--muted); }
 .venue.soon { color: var(--muted); border-style: dashed; }
 .arx { font-family: var(--display); font-size: var(--t-xs); color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }
-.paper h3 { font-family: var(--display); font-weight: 700; font-size: var(--t-lg); line-height: 1.24; margin: 0; text-wrap: balance; letter-spacing: -0.005em; }
+.paper h3 { font-family: var(--display); font-weight: 700; font-size: var(--t-lg); line-height: 1.24; margin: 4px 0 0; text-wrap: balance; letter-spacing: -0.005em; max-width: 46em; }
 .authors { margin: 0; font-size: var(--t-sm); color: var(--muted); line-height: 1.55; }
 .sum { margin: 0; max-width: 38em; }
 .finding {
@@ -223,7 +220,7 @@ a { color: inherit; }
 .create .finding svg { color: var(--create); }
 .join .finding svg { color: var(--join); }
 .finding b { font-family: var(--display); font-weight: 700; }
-.links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 6px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
 .links a, .links span {
   font-family: var(--display); font-weight: 700; font-size: var(--t-sm); text-decoration: none;
   padding: 6px 15px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--surface);
@@ -235,23 +232,23 @@ a { color: inherit; }
 /* ---------- contact ---------- */
 .contact { padding-block: 72px 24px; }
 .contact-card {
-  display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 28px 48px; align-items: start;
+  display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 28px 48px; align-items: start;
   padding: 34px; border-radius: var(--r-card); background: var(--ink); color: var(--paper);
 }
 .contact-card h2 { font-family: var(--display); font-weight: 800; font-size: var(--t-xl); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.01em; }
 .contact-card > div > p { margin: 0; color: color-mix(in srgb, var(--paper) 78%, var(--ink)); max-width: 30em; }
-.people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.people { display: grid; gap: 12px; }
 .person {
-  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; align-items: center;
-  padding: 16px; border-radius: var(--r-inner); background: color-mix(in srgb, var(--paper) 9%, var(--ink));
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 16px; align-items: center;
+  padding: 14px 18px; border-radius: var(--r-inner); background: color-mix(in srgb, var(--paper) 9%, var(--ink));
 }
-.avatar { grid-row: span 3; width: 46px; height: 46px; }
+.avatar { grid-row: span 2; width: 46px; height: 46px; }
+.who { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
 .person strong { font-family: var(--display); font-weight: 700; font-size: var(--t-md); }
 .person .role { font-size: var(--t-sm); color: color-mix(in srgb, var(--paper) 70%, var(--ink)); }
-.person .acts { display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: var(--display); font-weight: 600; font-size: var(--t-sm); }
-.person .acts a { text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--paper) 40%, var(--ink)); }
+.person .acts { display: flex; flex-wrap: wrap; gap: 4px 18px; font-family: var(--display); font-weight: 600; font-size: var(--t-sm); }
+.person .acts a { text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--paper) 40%, var(--ink)); white-space: nowrap; }
 .person .acts a:hover { border-color: var(--paper); }
-.person .mail { overflow-wrap: anywhere; }
 
 footer { padding-block: 28px 48px; color: var(--muted); font-size: var(--t-sm); }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; }
@@ -260,8 +257,7 @@ footer p { margin: 0; }
 @media (max-width: 900px) {
   .hero .wrap { grid-template-columns: 1fr; }
   .stage { max-width: 500px; }
-  .body { grid-template-columns: 1fr; }
-  .story { padding-top: 0; }
+  .paper { grid-template-columns: 1fr; grid-template-areas: "head" "fig" "body"; }
   .contact-card { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -322,75 +318,67 @@ footer p { margin: 0; }
       <div class="papers">
 
         <article class="paper" id="msaa">
-          <figure class="fig"><img src="images/2026-social-interaction.webp" alt="Overview of multi-speaker attention alignment, linking each speaker's visual tokens to their utterances inside an MLLM" loading="lazy" width="1200" height="602"></figure>
-          <div class="body">
-            <div class="ident">
+          <header class="head">
             <div class="meta"><span class="venue won">CVPR 2026</span><span class="arx">arXiv 2511.17952</span></div>
             <h3>Multi-speaker Attention Alignment for Multimodal Social Interaction</h3>
             <p class="authors">Liangyang Ouyang, Yifei Huang, Mingfang Zhang, Caixin Kang, Ryosuke Furuta, Yoichi Sato</p>
+          </header>
+          <figure class="fig"><img src="images/2026-social-interaction.webp" alt="Overview of multi-speaker attention alignment, linking each speaker's visual tokens to their utterances inside an MLLM" loading="lazy" width="1200" height="602"></figure>
+          <div class="body">
+            <p class="sum">In multi-speaker scenes, MLLMs struggle to associate each person's appearance with what they say. We identify the attention heads responsible for cross-modal grounding and inject a social-aware attention bias derived from speaker locations, without any additional training.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>State of the art</b> on four social tasks across TVQA+, MMSI, and OnlineMMSI, with LLaVA-NeXT-Video, Qwen2.5-VL, and InternVL3.</span></p>
             <div class="links">
               <a href="https://arxiv.org/abs/2511.17952">Paper</a>
               <a href="https://github.com/ut-vision/SocialInteraction">Code</a>
-            </div>
-            </div>
-            <div class="story">
-            <p class="sum">In multi-speaker scenes, MLLMs struggle to associate each person's appearance with what they say. We identify the attention heads responsible for cross-modal grounding and inject a social-aware attention bias derived from speaker locations, without any additional training.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>State of the art</b> on four social tasks across TVQA+, MMSI, and OnlineMMSI, with LLaVA-NeXT-Video, Qwen2.5-VL, and InternVL3.</span></p>
             </div>
           </div>
         </article>
 
         <article class="paper" id="mida">
-          <figure class="fig"><img src="images/2026-read-the-room.webp" alt="MIDA overview: Werewolf game clips labelled NEUTRAL, FALSE, and TRUE, the annotation pipeline, evaluated MLLMs, and the SoCoT and DSEM modules" loading="lazy" width="1200" height="574"></figure>
-          <div class="body">
-            <div class="ident">
+          <header class="head">
             <div class="meta"><span class="venue won">EMNLP 2026 Main</span><span class="arx">arXiv 2511.16221</span></div>
             <h3>Can MLLMs Read the Room? A Multimodal Benchmark for Assessing Deception in Multi-Party Social Interactions</h3>
             <p class="authors">Caixin Kang, Yifei Huang, Liangyang Ouyang, Mingfang Zhang, Ruicong Liu, Yoichi Sato</p>
+          </header>
+          <figure class="fig"><img src="images/2026-read-the-room.webp" alt="MIDA overview: Werewolf game clips labelled NEUTRAL, FALSE, and TRUE, the annotation pipeline, evaluated MLLMs, and the SoCoT and DSEM modules" loading="lazy" width="1200" height="574"></figure>
+          <div class="body">
+            <p class="sum">MIDA asks whether each statement in a game of One Night Ultimate Werewolf is true, false, or neutral, with ground truth reconstructed from manually annotated night actions. We benchmark 12 MLLMs and introduce Social Chain-of-Thought reasoning with a Dynamic Social Epistemic Memory.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>2,360 statements</b> with verifiable labels; even GPT-4o struggles to separate truth from deception.</span></p>
             <div class="links">
               <a href="https://arxiv.org/abs/2511.16221">Paper</a>
               <a href="https://github.com/kkkcx/Can-MLLMs-Read-the-Room">Code</a>
               <a href="https://huggingface.co/datasets/Ukpkmkkk/MIDA">Dataset</a>
             </div>
-            </div>
-            <div class="story">
-            <p class="sum">MIDA asks whether each statement in a game of One Night Ultimate Werewolf is true, false, or neutral, with ground truth reconstructed from manually annotated night actions. We benchmark 12 MLLMs and introduce Social Chain-of-Thought reasoning with a Dynamic Social Epistemic Memory.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>2,360 statements</b> with verifiable labels; even GPT-4o struggles to separate truth from deception.</span></p>
-            </div>
           </div>
         </article>
 
         <article class="paper" id="mmocean">
-          <figure class="fig"><img src="images/2026-mm-ocean.webp" alt="MM-OCEAN overview: grounded personality reasoning through rating, reasoning, and grounding" loading="lazy" width="1200" height="725"></figure>
-          <div class="body">
-            <div class="ident">
+          <header class="head">
             <div class="meta"><span class="venue open">Under review</span><span class="arx">arXiv 2605.22109</span></div>
             <h3>Perception or Prejudice: Can MLLMs Go Beyond First Impressions of Personality?</h3>
             <p class="authors">Caixin Kang*, Tianyu Yan*, Sitong Gong*, Mingfang Zhang, Liangyang Ouyang, Ruicong Liu, Bo Zheng, Huchuan Lu, Kaipeng Zhang, Yoichi Sato, Yifei Huang</p>
+          </header>
+          <figure class="fig"><img src="images/2026-mm-ocean.webp" alt="MM-OCEAN overview: grounded personality reasoning through rating, reasoning, and grounding" loading="lazy" width="1200" height="725"></figure>
+          <div class="body">
+            <p class="sum">Grounded Personality Reasoning requires a model to support each Big Five rating with observable behaviour. MM-OCEAN provides 1,104 videos and 5,320 cue-grounding questions, and a three-tier evaluation of 27 MLLMs.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>51% of correct ratings</b> are not grounded in any retrieved behavioural cue.</span></p>
             <div class="links">
               <a href="https://arxiv.org/abs/2605.22109">Paper</a>
               <a href="https://github.com/kkkcx/MM-OCEAN">Code</a>
-            </div>
-            </div>
-            <div class="story">
-            <p class="sum">Grounded Personality Reasoning requires a model to support each Big Five rating with observable behaviour. MM-OCEAN provides 1,104 videos and 5,320 cue-grounding questions, and a three-tier evaluation of 27 MLLMs.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>51% of correct ratings</b> are not grounded in any retrieved behavioural cue.</span></p>
             </div>
           </div>
         </article>
 
         <article class="paper" id="honeyed">
-          <figure class="fig"><img src="images/2026-honeyed-words.webp" alt="Overview of ZhenhuanBench and CPR-GRPO: building the benchmark from Empresses in the Palace, an example line with its honeyed words and hidden dagger, and the Compress, Probe, Replenish training loop" loading="lazy" width="1400" height="875"></figure>
-          <div class="body">
-            <div class="ident">
+          <header class="head">
             <div class="meta"><span class="venue soon">arXiv soon</span></div>
             <h3>Honeyed Words, Hidden Daggers: Benchmarking and Training LLMs to See Through Mock Politeness</h3>
-            <div class="links"><span>Paper soon</span></div>
-            </div>
-            <div class="story">
+          </header>
+          <figure class="fig"><img src="images/2026-honeyed-words.webp" alt="Overview of ZhenhuanBench and CPR-GRPO: building the benchmark from Empresses in the Palace, an example line with its honeyed words and hidden dagger, and the Compress, Probe, Replenish training loop" loading="lazy" width="1400" height="875"></figure>
+          <div class="body">
             <p class="sum">Mock politeness is polite in form but hostile in function. ZhenhuanBench turns 47 hours of expert commentary on <i>Empresses in the Palace</i> into 1,592 questions on speaker intent, emotion–language mismatch, and how each listener takes a remark. CPR-GRPO, a Compress–Probe–Replenish loop, reuses the same annotations to train an 8B model.</p>
             <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>34 LLMs evaluated.</b> The strongest reaches 73.48% overall but only 58.37% on how listeners react.</span></p>
-            </div>
+            <div class="links"><span>Paper soon</span></div>
           </div>
         </article>
 
@@ -407,39 +395,35 @@ footer p { margin: 0; }
       <div class="papers">
 
         <article class="paper" id="socialdirector">
-          <figure class="fig"><img src="images/2026-social-director.webp" alt="SocialDirector controls who does what, toward whom, and when in generated multi-person videos" loading="lazy" width="1200" height="693"></figure>
-          <div class="body">
-            <div class="ident">
+          <header class="head">
             <div class="meta"><span class="venue won">NeurIPS 2026</span><span class="arx">arXiv 2605.10079</span></div>
             <h3>SocialDirector: Training-Free Social Interaction Control for Multi-Person Video Generation</h3>
             <p class="authors">Liangyang Ouyang, Ruicong Liu, Caixin Kang, Yifei Huang, Yoichi Sato</p>
+          </header>
+          <figure class="fig"><img src="images/2026-social-director.webp" alt="SocialDirector controls who does what, toward whom, and when in generated multi-person videos" loading="lazy" width="1200" height="693"></figure>
+          <div class="body">
+            <p class="sum">Video generators often assign an action to the wrong person or direct it at the wrong target. Social Actor Masking binds each person to their own description, and Directional Reweighting steers each action toward its intended target, both by modulating cross-attention.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>Training-free control</b> of who acts, toward whom, and when, across several video generation models.</span></p>
             <div class="links">
               <a href="https://arxiv.org/abs/2605.10079">Paper</a>
               <span>Code soon</span>
-            </div>
-            </div>
-            <div class="story">
-            <p class="sum">Video generators often assign an action to the wrong person or direct it at the wrong target. Social Actor Masking binds each person to their own description, and Directional Reweighting steers each action toward its intended target, both by modulating cross-attention.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>Training-free control</b> of who acts, toward whom, and when, across several video generation models.</span></p>
             </div>
           </div>
         </article>
 
         <article class="paper" id="helloworld">
-          <figure class="fig"><img src="images/2026-helloworld.webp" alt="HelloWorld: pressing a button makes the on-screen character turn toward the viewer and greet them" loading="lazy" width="1200" height="480"></figure>
-          <div class="body">
-            <div class="ident">
+          <header class="head">
             <div class="meta"><span class="venue open">Preprint</span><span class="arx">arXiv 2608.05070</span></div>
             <h3>HelloWorld: Enabling Socially Interactive Characters in Video World Models</h3>
             <p class="authors">Liangyang Ouyang, Ruicong Liu, Xuangeng Chu, Kaipeng Zhang, Yoichi Sato</p>
+          </header>
+          <figure class="fig"><img src="images/2026-helloworld.webp" alt="HelloWorld: pressing a button makes the on-screen character turn toward the viewer and greet them" loading="lazy" width="1200" height="480"></figure>
+          <div class="body">
+            <p class="sum">A video world model with characters that respond to the viewer. At the press of a button, the on-screen character turns to the camera, waves, nods, or greets the viewer, while the camera continues to follow user control.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>HelloWorldBench</b>, 400 samples scored on three social interaction metrics and three visual quality metrics.</span></p>
             <div class="links">
               <a href="https://arxiv.org/abs/2608.05070">Paper</a>
               <a href="https://github.com/AlayaLab/HelloWorld">Project page</a>
-            </div>
-            </div>
-            <div class="story">
-            <p class="sum">A video world model with characters that respond to the viewer. At the press of a button, the on-screen character turns to the camera, waves, nods, or greets the viewer, while the camera continues to follow user control.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>HelloWorldBench</b>, 400 samples scored on three social interaction metrics and three visual quality metrics.</span></p>
             </div>
           </div>
         </article>
@@ -457,19 +441,17 @@ footer p { margin: 0; }
       <div class="papers">
 
         <article class="paper" id="hico">
-          <figure class="fig"><img src="images/2026-social-agent.webp" alt="HICO-Bench example: assuming what Maya needs fails, while clarifying first leads to a verified plan in both possible worlds" loading="lazy" width="1200" height="523"></figure>
-          <div class="body">
-            <div class="ident">
+          <header class="head">
             <div class="meta"><span class="venue open">Preprint</span><span class="arx">arXiv 2610.20195</span></div>
             <h3>What Makes a Social Agent’s Interactions Effective? Learning from Verifiable Outcomes in Paired Worlds</h3>
             <p class="authors">Caixin Kang, Ke Wang, Yuchuan Wu, Xiaoqiang Wang, Ling Li, Bingxue Qiu, Yongbin Li, Yoichi Sato</p>
-            <div class="links">
-              <a href="https://arxiv.org/abs/2610.20195">Paper</a>
-            </div>
-            </div>
-            <div class="story">
+          </header>
+          <figure class="fig"><img src="images/2026-social-agent.webp" alt="HICO-Bench example: assuming what Maya needs fails, while clarifying first leads to a verified plan in both possible worlds" loading="lazy" width="1200" height="523"></figure>
+          <div class="body">
             <p class="sum">HICO-Bench pairs two agents holding private information across 180 everyday coordination scenarios and verifies whether the plan they agree on actually works. Paired-Credit Policy Optimization learns from these verified outcomes turn by turn.</p>
             <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>36% of conversations</b> rated highly for goal completion still fail verification; PaCPO lifts Qwen3-8B from 20.4% to 28.3%.</span></p>
+            <div class="links">
+              <a href="https://arxiv.org/abs/2610.20195">Paper</a>
             </div>
           </div>
         </article>
@@ -488,14 +470,12 @@ footer p { margin: 0; }
         <div class="people">
           <div class="person">
             <svg class="avatar" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="23" fill="var(--create)"/><circle cx="23" cy="20" r="11" fill="var(--skin)"/><path d="M12 19a11 11 0 0 1 22 0q-11-6-22 0z" fill="var(--face)" opacity=".85"/><circle cx="19" cy="21" r="1.4" fill="var(--face)"/><circle cx="27" cy="21" r="1.4" fill="var(--face)"/><path d="M20 25q3 2.4 6 0" stroke="var(--face)" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
-            <strong>Liangyang Ouyang</strong>
-            <span class="role">The University of Tokyo</span>
-            <span class="acts"><a href="https://www.ut-vision.org/authors/liangyang-ouyang/">Profile</a></span>
+            <span class="who"><strong>Liangyang Ouyang</strong><span class="role">The University of Tokyo</span></span>
+            <span class="acts"><a href="https://scholar.google.com/citations?user=_5LNXVMAAAAJ&amp;hl=en">Google Scholar</a><a class="mail" href="mailto:oyly@iis.u-tokyo.ac.jp">oyly@iis.u-tokyo.ac.jp</a></span>
           </div>
           <div class="person">
             <svg class="avatar" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="23" fill="var(--read)"/><circle cx="23" cy="20" r="11" fill="var(--skin)"/><path d="M12 19a11 11 0 0 1 22 0q-11-6-22 0z" fill="var(--face)" opacity=".85"/><circle cx="19" cy="21" r="1.4" fill="var(--face)"/><circle cx="27" cy="21" r="1.4" fill="var(--face)"/><path d="M20 25q3 2.4 6 0" stroke="var(--face)" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
-            <strong>Caixin Kang</strong>
-            <span class="role">The University of Tokyo</span>
+            <span class="who"><strong>Caixin Kang</strong><span class="role">The University of Tokyo</span></span>
             <span class="acts"><a href="https://kkkcx.github.io/">Homepage</a><a class="mail" href="mailto:cxkang@iis.u-tokyo.ac.jp">cxkang@iis.u-tokyo.ac.jp</a></span>
           </div>
         </div>
