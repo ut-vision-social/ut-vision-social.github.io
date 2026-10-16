@@ -6,6 +6,7 @@
 <title>Social Intelligence @ UT-Vision</title>
 <meta name="description" content="Social intelligence research at UT-Vision Lab, The University of Tokyo: AI that understands, generates, and takes part in human interaction.">
 <link rel="canonical" href="https://ut-vision-social.github.io/">
+<meta name="theme-color" content="#fffaf6">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Social Intelligence @ UT-Vision">
@@ -22,121 +23,87 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Kalam:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Kalam:wght@400&display=swap">
 <style>
-/* Layout: a round-table hero where each seated figure stands for one project, then three
-   bands that follow an interaction from the outside in (understand it, generate it, take part
-   in it). Every project is the same row: its own figure beside a short account of the work.
-   Shape grammar: pills = status and links; 22px cards = projects; speech bubbles = voices. */
+/* Layout: a warm, single light theme. Round-table hero (one seated figure per project), then
+   one full-width pastel band per research area. Inside a band, projects are rows divided by a
+   dashed line, not boxed cards: title row on top, figure and story side by side below.
+   Colour: three macaron hues name the three areas (sky, strawberry, pistachio); lemon and
+   peach are the table and the welcome mat. Each hue has a pale tint (band) and a deep tone (text). */
 :root {
-  --paper: #f4f6fb;
+  color-scheme: light;
+  --paper: #fffaf6;
   --surface: #ffffff;
-  --sunk: #eceff7;
-  --ink: #1b2137;
-  --muted: #5a6280;
-  --line: #dde2ee;
-  --read: #2b5ba8;
-  --create: #cc4c35;
-  --join: #c99514;
-  --join-ink: #2a2003;
-  --on-accent: #ffffff;
-  --skin: #ffe2cc;
-  --cheek: #f4a19c;
-  --face: #1b2137;
+  --ink: #3b2f3a;
+  --muted: #7b6c77;
+  --line: #f0e4df;
 
-  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --sky: #c3dff2;        --sky-tint: #f0f7fc;        --sky-deep: #2f668c;
+  --berry: #f7c9d1;      --berry-tint: #fef1f3;      --berry-deep: #a83c56;
+  --pista: #d0e7c4;      --pista-tint: #f1f8ec;      --pista-deep: #43723a;
+  --lemon: #fbe9ad;
+  --peach: #fad5c2;      --peach-tint: #fff3eb;
+
+  /* aliases used by the table illustration */
+  --read: var(--sky); --create: var(--berry); --join: var(--pista);
+  --skin: #ffe5d4; --cheek: #f5aeb0; --face: #3b2f3a;
+
+  --display: "Young Serif", "Iowan Old Style", Georgia, serif;
   --body: "Literata", "Iowan Old Style", Georgia, serif;
+  --ui: "Figtree", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --hand: "Kalam", "Bradley Hand", "Segoe Print", cursive;
 
-  --t-xs: 0.78rem;
-  --t-sm: 0.88rem;
-  --t-md: 1.02rem;
-  --t-lg: 1.28rem;
-  --t-xl: 1.75rem;
-  --t-hero: clamp(2.7rem, 6.2vw, 4.6rem);
-
-  --r-card: 22px;
-  --r-inner: 14px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --paper: #11152a; --surface: #191e36; --sunk: #141932; --ink: #eceef7; --muted: #a3aac6; --line: #2b3253;
-    --read: #8aaef4; --create: #f2927c; --join: #f0c75c; --join-ink: #2a2003; --on-accent: #11152a;
-    --skin: #f2d1bb;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --paper: #11152a; --surface: #191e36; --sunk: #141932; --ink: #eceef7; --muted: #a3aac6; --line: #2b3253;
-  --read: #8aaef4; --create: #f2927c; --join: #f0c75c; --join-ink: #2a2003; --on-accent: #11152a;
-  --skin: #f2d1bb;
+  --t-xs: 0.8rem;
+  --t-sm: 0.9rem;
+  --t-md: 1.03rem;
+  --t-lg: 1.42rem;
+  --t-xl: 1.9rem;
+  --t-hero: clamp(2.8rem, 6.4vw, 4.8rem);
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--body);
-  font-size: var(--t-md);
-  line-height: 1.62;
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: var(--t-md); line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--read); outline-offset: 3px; border-radius: 8px; }
-
+:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 3px; border-radius: 6px; }
 .wrap {
-  max-width: 1120px;
-  margin: 0 auto;
+  max-width: 1120px; margin: 0 auto;
   padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
-.label {
-  font-family: var(--display); font-weight: 600; font-size: var(--t-xs);
-  letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
-}
+.label { font-family: var(--ui); font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 
 /* ---------- top bar ---------- */
-.bar { padding-block: 20px; }
+.bar { padding-block: 22px; }
 .bar .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
-.mark { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: var(--t-md); text-decoration: none; letter-spacing: -0.01em; }
-.mark-dots { display: inline-flex; gap: 3px; }
-.mark-dots i { width: 9px; height: 9px; border-radius: 50%; display: block; }
-.bar nav { display: flex; gap: 4px; flex-wrap: wrap; }
-.bar nav a {
-  font-family: var(--display); font-weight: 600; font-size: var(--t-sm);
-  text-decoration: none; padding: 5px 12px; border-radius: 999px; color: var(--muted);
-}
-.bar nav a:hover { color: var(--ink); background: var(--surface); }
+.mark { display: inline-flex; align-items: center; gap: 10px; font-family: var(--ui); font-weight: 700; font-size: var(--t-md); text-decoration: none; }
+.mark-dots { display: inline-flex; }
+.mark-dots i { width: 14px; height: 14px; border-radius: 50%; display: block; border: 2px solid var(--paper); margin-left: -4px; }
+.mark-dots i:first-child { margin-left: 0; }
+.mark-dots .read { background: var(--sky); } .mark-dots .create { background: var(--berry); } .mark-dots .join { background: var(--pista); }
+.bar nav { display: flex; gap: 2px; flex-wrap: wrap; }
+.bar nav a { font-family: var(--ui); font-weight: 600; font-size: var(--t-sm); text-decoration: none; padding: 5px 11px; border-radius: 10px; color: var(--muted); }
+.bar nav a:hover { color: var(--ink); background: var(--peach-tint); }
 
 /* ---------- hero ---------- */
-.hero { padding-block: 24px 64px; }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 28px 48px; align-items: center; }
-.eyebrow { margin: 0 0 18px; }
-.eyebrow a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--line); }
-.eyebrow a:hover { color: var(--ink); border-color: var(--ink); }
-.hero h1 {
-  font-family: var(--display); font-weight: 800; font-size: var(--t-hero);
-  line-height: 0.96; letter-spacing: -0.025em; margin: 0 0 22px; text-wrap: balance;
-}
-.hero h1 span { display: block; color: var(--muted); font-weight: 600; font-size: 0.42em; letter-spacing: -0.01em; margin-top: 14px; line-height: 1.2; }
+.hero { padding-block: 28px 72px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px 48px; align-items: center; }
+.eyebrow { margin: 0 0 16px; }
+.eyebrow a { text-decoration: none; background: linear-gradient(transparent 62%, var(--lemon) 62%); color: var(--ink); }
+.hero h1 { font-family: var(--display); font-weight: 400; font-size: var(--t-hero); line-height: 1.02; letter-spacing: -0.01em; margin: 0 0 20px; text-wrap: balance; }
+.hero h1 span { display: block; font-family: var(--ui); font-weight: 600; font-size: 0.36em; line-height: 1.3; letter-spacing: 0; color: var(--muted); margin-top: 16px; }
 .lede { margin: 0 0 26px; max-width: 33em; }
-.trio { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.trio a {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--display); font-weight: 700; font-size: var(--t-sm);
-  text-decoration: none; padding: 7px 15px 7px 9px; border-radius: 999px;
-  background: var(--surface); border: 1px solid var(--line); transition: border-color .15s;
-}
-.trio a:hover { border-color: var(--ink); }
-.dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex: none; }
-.dot.read, .mark-dots .read { background: var(--read); }
-.dot.create, .mark-dots .create { background: var(--create); }
-.dot.join, .mark-dots .join { background: var(--join); }
+.trio { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.trio a { display: inline-block; font-family: var(--ui); font-weight: 700; font-size: var(--t-sm); text-decoration: none; padding: 7px 14px; border-radius: 12px; transition: transform .15s; }
+.trio a:hover { transform: translateY(-2px); }
+.trio .read a { background: var(--sky); color: var(--sky-deep); }
+.trio .create a { background: var(--berry); color: var(--berry-deep); }
+.trio .join a { background: var(--pista); color: var(--pista-deep); }
 
-/* the table illustration */
 .stage { position: relative; width: 100%; max-width: 540px; justify-self: center; padding-top: 40px; }
 .stage svg { width: 100%; height: auto; display: block; }
 .seat { cursor: pointer; }
@@ -147,112 +114,86 @@ a { color: inherit; }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 .say {
   position: absolute; transform: translate(-50%, calc(-100% - 12px));
-  font-family: var(--hand); font-size: 1.06rem; line-height: 1.25; white-space: nowrap;
+  font-family: var(--hand); font-size: 1.08rem; line-height: 1.25; white-space: nowrap;
   background: var(--surface); color: var(--ink); border: 2px solid var(--ink);
-  padding: 7px 14px 6px; border-radius: 18px; pointer-events: none;
-  transition: left .35s ease, top .35s ease;
+  padding: 7px 14px 6px; border-radius: 18px; pointer-events: none; transition: left .35s ease, top .35s ease;
 }
 .say::after {
   content: ""; position: absolute; left: var(--tail, 50%); bottom: -9px; width: 14px; height: 14px;
   background: var(--surface); border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
   transform: translateX(-50%) rotate(45deg);
 }
-.say small { display: block; font-family: var(--display); font-weight: 600; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.stage-note { text-align: center; margin: 14px 0 0; }
+.say small { display: block; font-family: var(--ui); font-weight: 600; font-size: 0.72rem; color: var(--muted); }
+.stage-note { text-align: center; margin: 12px 0 0; }
 
-/* ---------- pillars ---------- */
-.pillar { padding-block: 56px 8px; }
-.pillar + .pillar { padding-top: 64px; }
-.pillar-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 24px; align-items: end; margin-bottom: 30px; }
+/* ---------- research bands ---------- */
+.pillar { padding-block: 64px 72px; background: var(--tint); }
+.pillar.read   { --tint: var(--sky-tint);   --accent: var(--sky);   --deep: var(--sky-deep); }
+.pillar.create { --tint: var(--berry-tint); --accent: var(--berry); --deep: var(--berry-deep); }
+.pillar.join   { --tint: var(--pista-tint); --accent: var(--pista); --deep: var(--pista-deep); }
+.pillar-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 28px; align-items: center; margin-bottom: 40px; }
 .tag {
-  position: relative; display: inline-block; font-family: var(--display); font-weight: 800; font-size: var(--t-xl);
-  line-height: 1; padding: 13px 22px 14px; border-radius: 22px; color: var(--on-accent); white-space: nowrap; justify-self: start;
-  letter-spacing: -0.01em;
+  position: relative; justify-self: start; font-family: var(--display); font-size: var(--t-xl); line-height: 1;
+  padding: 14px 24px 15px; border-radius: 24px; background: var(--accent); color: var(--deep); white-space: nowrap;
 }
-.tag::after {
-  content: ""; position: absolute; left: 24px; bottom: -7px; width: 16px; height: 16px;
-  background: inherit; transform: rotate(45deg); border-radius: 3px;
-}
-.read .tag { background: var(--read); }
-.create .tag { background: var(--create); }
-.join .tag { background: var(--join); color: var(--join-ink); }
-.pillar-head p { margin: 0; max-width: 42em; color: var(--muted); padding-bottom: 4px; }
+.tag::after { content: ""; position: absolute; left: 26px; bottom: -7px; width: 16px; height: 16px; background: inherit; transform: rotate(45deg); border-radius: 3px; }
+.pillar-head p { margin: 0; max-width: 40em; color: var(--muted); }
 
-.papers { display: grid; gap: 20px; }
+.papers { display: grid; gap: 0; }
 .paper {
   display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-areas: "head head" "fig body";
-  gap: 20px 34px; align-items: center;
-  padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
-  scroll-margin-top: 24px; transition: border-color .2s;
+  gap: 18px 40px; align-items: center; padding-block: 36px; scroll-margin-top: 20px;
 }
-.paper:hover { border-color: color-mix(in srgb, var(--ink) 30%, var(--line)); }
-.paper:target { border-color: var(--ink); }
-/* The figure sits beside the text, centred on the text block's height, with no mat
-   behind it, so any difference in height reads as even margin rather than an empty box. */
-.head { grid-area: head; display: flex; flex-direction: column; gap: 8px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.paper + .paper { border-top: 2px dashed color-mix(in srgb, var(--accent) 80%, var(--deep)); }
+.paper:first-child { padding-top: 0; }
+.paper:last-child { padding-bottom: 0; }
+.head { grid-area: head; display: flex; flex-direction: column; gap: 6px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-bottom: 4px; }
+.venue {
+  display: inline-block; font-family: var(--ui); font-weight: 700; font-size: var(--t-xs);
+  padding: 3px 10px; border-radius: 7px; transform: rotate(-2deg);
+}
+.venue.won { background: var(--accent); color: var(--deep); }
+.venue.open { background: var(--surface); color: var(--muted); box-shadow: inset 0 0 0 1.5px var(--line); }
+.venue.soon { background: var(--lemon); color: #7a5b0c; }
+.arx { font-family: var(--ui); font-size: var(--t-xs); color: var(--muted); font-variant-numeric: tabular-nums; }
+.paper h3 { font-family: var(--display); font-weight: 400; font-size: var(--t-lg); line-height: 1.25; margin: 0; text-wrap: balance; max-width: 40em; }
+.authors { margin: 0; font-size: var(--t-sm); color: var(--muted); line-height: 1.55; }
 .fig { grid-area: fig; margin: 0; align-self: center; }
 .fig img {
-  width: 100%; height: auto; display: block; background: #fff; padding: 6px;
-  border-radius: var(--r-inner); border: 1px solid var(--line);
-  box-shadow: 0 10px 24px -16px rgba(27, 33, 55, .45);
+  width: 100%; height: auto; display: block; background: #fff; padding: 8px; border-radius: 16px;
+  box-shadow: 0 1px 0 rgba(59, 47, 58, .06), 0 16px 34px -22px rgba(120, 70, 80, .45);
 }
-
 .body { grid-area: body; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-.meta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
-.venue {
-  font-family: var(--display); font-weight: 700; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 3px 11px; border-radius: 999px; border: 1.5px solid currentColor; line-height: 1.5;
-}
-.venue.won { border-color: transparent; color: var(--on-accent); }
-.read .venue.won { background: var(--read); }
-.create .venue.won { background: var(--create); }
-.join .venue.won { background: var(--join); color: var(--join-ink); }
-.venue.open { color: var(--muted); }
-.venue.soon { color: var(--muted); border-style: dashed; }
-.arx { font-family: var(--display); font-size: var(--t-xs); color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }
-.paper h3 { font-family: var(--display); font-weight: 700; font-size: var(--t-lg); line-height: 1.24; margin: 4px 0 0; text-wrap: balance; letter-spacing: -0.005em; max-width: 46em; }
-.authors { margin: 0; font-size: var(--t-sm); color: var(--muted); line-height: 1.55; }
-.sum { margin: 0; max-width: 38em; }
-.finding {
-  margin: 2px 0 4px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start;
-  font-size: var(--t-sm); line-height: 1.5;
-}
-.finding svg { width: 22px; height: 20px; margin-top: 1px; }
-.read .finding svg { color: var(--read); }
-.create .finding svg { color: var(--create); }
-.join .finding svg { color: var(--join); }
-.finding b { font-family: var(--display); font-weight: 700; }
-.links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
-.links a, .links span {
-  font-family: var(--display); font-weight: 700; font-size: var(--t-sm); text-decoration: none;
-  padding: 6px 15px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--surface);
-  transition: background .15s, color .15s;
-}
-.links a:hover { background: var(--ink); color: var(--surface); }
-.links span { border-style: dashed; border-color: var(--line); color: var(--muted); }
+.sum { margin: 0; max-width: 36em; }
+.finding { margin: 0; font-size: var(--t-sm); line-height: 1.55; font-style: italic; }
+.finding mark { font-style: normal; font-family: var(--ui); font-weight: 700; color: var(--ink); background: linear-gradient(transparent 55%, var(--accent) 55%); padding: 0 2px; }
+.links { display: flex; flex-wrap: wrap; gap: 6px 22px; padding-top: 2px; }
+.links a, .links span { font-family: var(--ui); font-weight: 700; font-size: var(--t-sm); text-decoration: none; color: var(--deep); }
+.links a { border-bottom: 2px solid var(--accent); padding-bottom: 1px; transition: border-color .15s; }
+.links a::after { content: " \2197"; font-weight: 600; }
+.links a:hover { border-color: var(--deep); }
+.links span { color: var(--muted); font-weight: 600; }
 
 /* ---------- contact ---------- */
-.contact { padding-block: 72px 24px; }
-.contact-card {
-  display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 28px 48px; align-items: start;
-  padding: 34px; border-radius: var(--r-card); background: var(--ink); color: var(--paper);
-}
-.contact-card h2 { font-family: var(--display); font-weight: 800; font-size: var(--t-xl); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.01em; }
-.contact-card > div > p { margin: 0; color: color-mix(in srgb, var(--paper) 78%, var(--ink)); max-width: 30em; }
+.contact { padding-block: 72px 32px; background: var(--peach-tint); }
+.contact-card { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 28px 48px; align-items: center; }
+.contact-card h2 { font-family: var(--display); font-weight: 400; font-size: var(--t-xl); line-height: 1.1; margin: 0 0 12px; }
+.contact-card > div > p { margin: 0; color: var(--muted); max-width: 30em; }
 .people { display: grid; gap: 12px; }
 .person {
   display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 16px; align-items: center;
-  padding: 14px 18px; border-radius: var(--r-inner); background: color-mix(in srgb, var(--paper) 9%, var(--ink));
+  padding: 14px 18px; border-radius: 18px; background: var(--surface); box-shadow: 0 12px 28px -24px rgba(120, 70, 80, .5);
 }
-.avatar { grid-row: span 2; width: 46px; height: 46px; }
+.avatar { grid-row: span 2; width: 48px; height: 48px; }
 .who { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
-.person strong { font-family: var(--display); font-weight: 700; font-size: var(--t-md); }
-.person .role { font-size: var(--t-sm); color: color-mix(in srgb, var(--paper) 70%, var(--ink)); }
-.person .acts { display: flex; flex-wrap: wrap; gap: 4px 18px; font-family: var(--display); font-weight: 600; font-size: var(--t-sm); }
-.person .acts a { text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--paper) 40%, var(--ink)); white-space: nowrap; }
-.person .acts a:hover { border-color: var(--paper); }
+.person strong { font-family: var(--ui); font-weight: 700; font-size: var(--t-md); }
+.person .role { font-size: var(--t-sm); color: var(--muted); }
+.person .acts { display: flex; flex-wrap: wrap; gap: 4px 18px; font-family: var(--ui); font-weight: 600; font-size: var(--t-sm); }
+.person .acts a { text-decoration: none; border-bottom: 2px solid var(--peach); white-space: nowrap; }
+.person .acts a:hover { border-color: var(--ink); }
 
-footer { padding-block: 28px 48px; color: var(--muted); font-size: var(--t-sm); }
+footer { padding-block: 26px 44px; background: var(--peach-tint); color: var(--muted); font-size: var(--t-sm); }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; }
 footer p { margin: 0; }
 
@@ -264,17 +205,15 @@ footer p { margin: 0; }
 }
 @media (max-width: 560px) {
   .bar nav { gap: 0; margin-left: -7px; }
-  .bar nav a { padding: 4px 7px; font-size: 0.82rem; }
+  .bar nav a { padding: 4px 7px; font-size: 0.84rem; }
+  .pillar { padding-block: 48px 56px; }
   .pillar-head { grid-template-columns: 1fr; }
-  .paper { padding: 16px; border-radius: 18px; }
-  .people { grid-template-columns: 1fr; }
-  .contact-card { padding: 24px 20px; }
-  .say { font-size: 0.95rem; }
+  .say { font-size: 0.96rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .seat .bob { animation: none; }
-  .say { transition: none; }
+  .say, .trio a { transition: none; }
 }
 </style>
 
@@ -299,15 +238,15 @@ footer p { margin: 0; }
       <h1>Social Intelligence<span>AI that understands, generates, and takes part in human interaction</span></h1>
       <p class="lede">Everyday social life happens between several people at once. We infer what others know and intend, notice when something does not add up, and settle on plans together. This research line studies how multimodal AI can understand such interaction, generate it faithfully, and take part in it.</p>
       <ul class="trio">
-        <li><a href="#understanding"><span class="dot read"></span>Social Understanding</a></li>
-        <li><a href="#generation"><span class="dot create"></span>Social Generation</a></li>
-        <li><a href="#agents"><span class="dot join"></span>Social Agents</a></li>
+        <li class="read"><a href="#understanding">Social Understanding</a></li>
+        <li class="create"><a href="#generation">Social Generation</a></li>
+        <li class="join"><a href="#agents">Social Agents</a></li>
       </ul>
     </div>
     <div class="stage" id="stage">
       <svg id="tableSvg" viewBox="0 0 480 372" role="group" aria-label="Seven figures seated around a table, one for each project"></svg>
       <div class="say" id="say" aria-hidden="true" style="left:30%;top:22%"><small>Multi-speaker Attention</small>Who's talking to whom?</div>
-      <p class="stage-note label">Select a seat to view its project</p>
+      <p class="stage-note label">Click anyone at the table to jump to their project</p>
     </div>
   </div>
 </section>
@@ -330,7 +269,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-social-interaction.webp" alt="Overview of multi-speaker attention alignment, linking each speaker's visual tokens to their utterances inside an MLLM" loading="lazy" width="1200" height="602"></figure>
           <div class="body">
             <p class="sum">In multi-speaker scenes, MLLMs struggle to associate each person's appearance with what they say. We identify the attention heads responsible for cross-modal grounding and inject a social-aware attention bias derived from speaker locations, without any additional training.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>State of the art</b> on four social tasks across TVQA+, MMSI, and OnlineMMSI, with LLaVA-NeXT-Video, Qwen2.5-VL, and InternVL3.</span></p>
+            <p class="finding"><mark>State of the art</mark> on four social tasks across TVQA+, MMSI, and OnlineMMSI, with LLaVA-NeXT-Video, Qwen2.5-VL, and InternVL3.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2511.17952">Paper</a>
               <a href="https://github.com/ut-vision/SocialInteraction">Code</a>
@@ -347,7 +286,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-read-the-room.webp" alt="MIDA overview: Werewolf game clips labelled NEUTRAL, FALSE, and TRUE, the annotation pipeline, evaluated MLLMs, and the SoCoT and DSEM modules" loading="lazy" width="1200" height="574"></figure>
           <div class="body">
             <p class="sum">MIDA asks whether each statement in a game of One Night Ultimate Werewolf is true, false, or neutral, with ground truth reconstructed from manually annotated night actions. We benchmark 12 MLLMs and introduce Social Chain-of-Thought reasoning with a Dynamic Social Epistemic Memory.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>2,360 statements</b> with verifiable labels; even GPT-4o struggles to separate truth from deception.</span></p>
+            <p class="finding"><mark>2,360 statements</mark> with verifiable labels; even GPT-4o struggles to separate truth from deception.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2511.16221">Paper</a>
               <a href="https://github.com/kkkcx/Can-MLLMs-Read-the-Room">Code</a>
@@ -365,7 +304,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-mm-ocean.webp" alt="MM-OCEAN overview: grounded personality reasoning through rating, reasoning, and grounding" loading="lazy" width="1200" height="725"></figure>
           <div class="body">
             <p class="sum">Grounded Personality Reasoning requires a model to support each Big Five rating with observable behaviour. MM-OCEAN provides 1,104 videos and 5,320 cue-grounding questions, and a three-tier evaluation of 27 MLLMs.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>51% of correct ratings</b> are not grounded in any retrieved behavioural cue.</span></p>
+            <p class="finding"><mark>51% of correct ratings</mark> are not grounded in any retrieved behavioural cue.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2605.22109">Paper</a>
               <a href="https://github.com/kkkcx/MM-OCEAN">Code</a>
@@ -381,7 +320,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-honeyed-words.webp" alt="Overview of ZhenhuanBench and CPR-GRPO: building the benchmark from Empresses in the Palace, an example line with its honeyed words and hidden dagger, and the Compress, Probe, Replenish training loop" loading="lazy" width="1400" height="875"></figure>
           <div class="body">
             <p class="sum">Mock politeness is polite in form but hostile in function. ZhenhuanBench turns 47 hours of expert commentary on <i>Empresses in the Palace</i> into 1,592 questions on speaker intent, emotion–language mismatch, and how each listener takes a remark. CPR-GRPO, a Compress–Probe–Replenish loop, reuses the same annotations to train an 8B model.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>34 LLMs evaluated.</b> The strongest reaches 73.48% overall but only 58.37% on how listeners react.</span></p>
+            <p class="finding"><mark>34 LLMs evaluated.</mark> The strongest reaches 73.48% overall but only 58.37% on how listeners react.</p>
             <div class="links"><span>Paper soon</span></div>
           </div>
         </article>
@@ -407,7 +346,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-social-director.webp" alt="SocialDirector controls who does what, toward whom, and when in generated multi-person videos" loading="lazy" width="1200" height="693"></figure>
           <div class="body">
             <p class="sum">Video generators often assign an action to the wrong person or direct it at the wrong target. Social Actor Masking binds each person to their own description, and Directional Reweighting steers each action toward its intended target, both by modulating cross-attention.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>Training-free control</b> of who acts, toward whom, and when, across several video generation models.</span></p>
+            <p class="finding"><mark>Training-free control</mark> of who acts, toward whom, and when, across several video generation models.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2605.10079">Paper</a>
               <span>Code soon</span>
@@ -424,7 +363,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-helloworld.webp" alt="HelloWorld: pressing a button makes the on-screen character turn toward the viewer and greet them" loading="lazy" width="1200" height="480"></figure>
           <div class="body">
             <p class="sum">A video world model with characters that respond to the viewer. At the press of a button, the on-screen character turns to the camera, waves, nods, or greets the viewer, while the camera continues to follow user control.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>HelloWorldBench</b>, 400 samples scored on three social interaction metrics and three visual quality metrics.</span></p>
+            <p class="finding"><mark>HelloWorldBench</mark>, 400 samples scored on three social interaction metrics and three visual quality metrics.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2608.05070">Paper</a>
               <a href="https://github.com/AlayaLab/HelloWorld">Project page</a>
@@ -453,7 +392,7 @@ footer p { margin: 0; }
           <figure class="fig"><img src="images/2026-social-agent.webp" alt="HICO-Bench example: assuming what Maya needs fails, while clarifying first leads to a verified plan in both possible worlds" loading="lazy" width="1200" height="523"></figure>
           <div class="body">
             <p class="sum">HICO-Bench pairs two agents holding private information across 180 everyday coordination scenarios and verifies whether the plan they agree on actually works. Paired-Credit Policy Optimization learns from these verified outcomes turn by turn.</p>
-            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>36% of conversations</b> rated highly for goal completion still fail verification; PaCPO lifts Qwen3-8B from 20.4% to 28.3%.</span></p>
+            <p class="finding"><mark>36% of conversations</mark> rated highly for goal completion still fail verification; PaCPO lifts Qwen3-8B from 20.4% to 28.3%.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/2610.20195">Paper</a>
             </div>
@@ -526,7 +465,7 @@ footer p { margin: 0; }
   const drawSeat = (s, i) => {
     const g = el("a", { href: "#" + s.id, class: "seat", "aria-label": s.short }, svg);
     const bob = el("g", { class: "bob", style: `animation-delay:${-i * 0.45}s` }, g);
-    el("path", { d: `M${s.x - 28} ${s.y + 54} q0 -34 28 -34 q28 0 28 34z`, fill: `var(--${s.group})` }, bob);
+    el("path", { d: `M${s.x - 28} ${s.y + 54} q0 -34 28 -34 q28 0 28 34z`, fill: `var(--${s.group})`, stroke: "rgba(59,47,58,.14)", "stroke-width": 1.5 }, bob);
     el("circle", { class: "head", cx: s.x, cy: s.y, r: 20, fill: "var(--skin)", stroke: "transparent", "stroke-width": 2.5 }, bob);
     el("path", { d: `M${s.x - 20} ${s.y - 1} a20 20 0 0 1 40 0 q-20 -11 -40 0z`, fill: "var(--face)", opacity: 0.82 }, bob);
     el("circle", { cx: s.x - 7, cy: s.y + 3, r: 2.3, fill: "var(--face)" }, bob);
@@ -538,14 +477,16 @@ footer p { margin: 0; }
   };
 
   const nodes = [];
+  // a lemon rug under the whole gathering
+  el("ellipse", { cx, cy: cy + 34, rx: rx + 50, ry: ry + 50, fill: "var(--lemon)", opacity: 0.6 }, svg);
   seats.forEach((s, i) => { if (!s.front) nodes[i] = drawSeat(s, i); });
-  el("ellipse", { cx, cy: cy + 9, rx, ry, fill: "var(--line)" }, svg);
-  el("ellipse", { cx, cy, rx, ry, fill: "var(--surface)", stroke: "var(--line)", "stroke-width": 2 }, svg);
-  el("ellipse", { cx, cy, rx: rx - 22, ry: ry - 12, fill: "none", stroke: "var(--line)", "stroke-width": 1.5, "stroke-dasharray": "2 6", "stroke-linecap": "round" }, svg);
+  el("ellipse", { cx, cy: cy + 10, rx, ry, fill: "var(--peach)" }, svg);
+  el("ellipse", { cx, cy, rx, ry, fill: "var(--surface)" }, svg);
+  el("ellipse", { cx, cy, rx: rx - 22, ry: ry - 12, fill: "none", stroke: "var(--peach)", "stroke-width": 2, "stroke-dasharray": "2 7", "stroke-linecap": "round" }, svg);
   [[-64, -12, -12, "read"], [-20, 12, 6, "create"], [26, -10, -4, "join"], [70, 12, 14, "read"]].forEach(([dx, dy, rot, c]) => {
     const g = el("g", { transform: `rotate(${rot} ${cx + dx} ${cy + dy})` }, svg);
-    el("rect", { x: cx + dx - 13, y: cy + dy - 18, width: 26, height: 36, rx: 4, fill: "var(--paper)", stroke: "var(--muted)", "stroke-width": 1.4 }, g);
-    el("circle", { cx: cx + dx, cy: cy + dy, r: 5, fill: `var(--${c})`, opacity: 0.8 }, g);
+    el("rect", { x: cx + dx - 13, y: cy + dy - 18, width: 26, height: 36, rx: 5, fill: `var(--${c})` }, g);
+    el("rect", { x: cx + dx - 8, y: cy + dy - 13, width: 16, height: 26, rx: 3, fill: "none", stroke: "var(--surface)", "stroke-width": 1.5 }, g);
   });
   seats.forEach((s, i) => { if (s.front) nodes[i] = drawSeat(s, i); });
 
