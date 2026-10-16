@@ -88,6 +88,16 @@ a { color: inherit; }
 .bar nav { display: flex; gap: 2px; flex-wrap: wrap; }
 .bar nav a { font-family: var(--ui); font-weight: 600; font-size: var(--t-sm); text-decoration: none; padding: 5px 11px; border-radius: 10px; color: var(--muted); }
 .bar nav a:hover { color: var(--ink); background: var(--peach-tint); }
+/* research areas: a dot in the area's colour; contact: a separate peach button */
+.bar nav { align-items: center; }
+.bar nav a[class^="nav-"]:not(.nav-contact)::before {
+  content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: 1px;
+}
+.bar nav .nav-read::before { background: color-mix(in srgb, var(--sky) 70%, var(--sky-deep)); }
+.bar nav .nav-create::before { background: color-mix(in srgb, var(--berry) 70%, var(--berry-deep)); }
+.bar nav .nav-join::before { background: color-mix(in srgb, var(--pista) 70%, var(--pista-deep)); }
+.bar nav .nav-contact { margin-left: 12px; background: var(--peach); color: var(--ink); padding: 6px 15px; border-radius: 12px; }
+.bar nav .nav-contact:hover { background: color-mix(in srgb, var(--peach) 80%, var(--ink) 8%); }
 
 /* ---------- hero ---------- */
 .hero { padding-block: 28px 72px; }
@@ -206,6 +216,8 @@ footer p { margin: 0; }
 @media (max-width: 560px) {
   .bar nav { gap: 0; margin-left: -7px; }
   .bar nav a { padding: 4px 7px; font-size: 0.84rem; }
+  .bar nav a[class^="nav-"]:not(.nav-contact)::before { width: 7px; height: 7px; margin-right: 5px; }
+  .bar nav .nav-contact { margin-left: 4px; padding: 4px 10px; }
   .pillar { padding-block: 48px 56px; }
   .pillar-head { grid-template-columns: 1fr; }
   .say { font-size: 0.96rem; }
@@ -223,10 +235,10 @@ footer p { margin: 0; }
   <div class="wrap">
     <a class="mark" href="#top"><span class="mark-dots" aria-hidden="true"><i class="read"></i><i class="create"></i><i class="join"></i></span>Social Intelligence @ UT-Vision</a>
     <nav aria-label="Sections">
-      <a href="#understanding">Understanding</a>
-      <a href="#generation">Generation</a>
-      <a href="#agents">Agents</a>
-      <a href="#contact">Contact</a>
+      <a class="nav-read" href="#understanding">Understanding</a>
+      <a class="nav-create" href="#generation">Generation</a>
+      <a class="nav-join" href="#agents">Agents</a>
+      <a class="nav-contact" href="#contact">Contact</a>
     </nav>
   </div>
 </header>
