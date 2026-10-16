@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Social Table · Sato Lab</title>
-<meta name="description" content="Social intelligence research at Sato Lab, The University of Tokyo: AI that understands, creates, and joins human interaction.">
+<title>Social Intelligence @ UT-Vision</title>
+<meta name="description" content="Social intelligence research at UT-Vision Lab, The University of Tokyo: AI that understands, generates, and takes part in human interaction.">
 <link rel="canonical" href="https://ut-vision-social.github.io/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="The Social Table">
-<meta property="og:title" content="The Social Table · Sato Lab, The University of Tokyo">
-<meta property="og:description" content="Social intelligence research at Sato Lab, The University of Tokyo: AI that understands, creates, and joins human interaction.">
+<meta property="og:site_name" content="Social Intelligence @ UT-Vision">
+<meta property="og:title" content="Social Intelligence @ UT-Vision · The University of Tokyo">
+<meta property="og:description" content="Social intelligence research at UT-Vision Lab, The University of Tokyo: AI that understands, generates, and takes part in human interaction.">
 <meta property="og:url" content="https://ut-vision-social.github.io/">
 <meta property="og:image" content="https://ut-vision-social.github.io/images/og.png">
 <meta property="og:image:width" content="1200">
@@ -18,6 +18,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ut-vision-social.github.io/images/og.png">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Social Intelligence @ UT-Vision</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Kalam:wght@400&display=swap">
@@ -261,6 +263,8 @@ footer p { margin: 0; }
   .contact-card { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
+  .bar nav { gap: 0; margin-left: -7px; }
+  .bar nav a { padding: 4px 7px; font-size: 0.82rem; }
   .pillar-head { grid-template-columns: 1fr; }
   .paper { padding: 16px; border-radius: 18px; }
   .people { grid-template-columns: 1fr; }
@@ -278,11 +282,11 @@ footer p { margin: 0; }
 <body>
 <header class="bar">
   <div class="wrap">
-    <a class="mark" href="#top"><span class="mark-dots" aria-hidden="true"><i class="read"></i><i class="create"></i><i class="join"></i></span>The Social Table</a>
+    <a class="mark" href="#top"><span class="mark-dots" aria-hidden="true"><i class="read"></i><i class="create"></i><i class="join"></i></span>Social Intelligence @ UT-Vision</a>
     <nav aria-label="Sections">
-      <a href="#read">Read</a>
-      <a href="#create">Create</a>
-      <a href="#join">Join</a>
+      <a href="#understanding">Understanding</a>
+      <a href="#generation">Generation</a>
+      <a href="#agents">Agents</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -291,13 +295,13 @@ footer p { margin: 0; }
 <section class="hero" id="top">
   <div class="wrap">
     <div>
-      <p class="eyebrow label"><a href="https://www.ut-vision.org/">Sato Lab · The University of Tokyo</a></p>
-      <h1>The Social Table<span>AI that understands, creates, and joins human interaction</span></h1>
+      <p class="eyebrow label"><a href="https://www.ut-vision.org/">UT-Vision Lab · The University of Tokyo</a></p>
+      <h1>Social Intelligence<span>AI that understands, generates, and takes part in human interaction</span></h1>
       <p class="lede">Everyday social life happens between several people at once. We infer what others know and intend, notice when something does not add up, and settle on plans together. This research line studies how multimodal AI can understand such interaction, generate it faithfully, and take part in it.</p>
       <ul class="trio">
-        <li><a href="#read"><span class="dot read"></span>Read the room</a></li>
-        <li><a href="#create"><span class="dot create"></span>Create the scene</a></li>
-        <li><a href="#join"><span class="dot join"></span>Join the conversation</a></li>
+        <li><a href="#understanding"><span class="dot read"></span>Social Understanding</a></li>
+        <li><a href="#generation"><span class="dot create"></span>Social Generation</a></li>
+        <li><a href="#agents"><span class="dot join"></span>Social Agents</a></li>
       </ul>
     </div>
     <div class="stage" id="stage">
@@ -309,10 +313,10 @@ footer p { margin: 0; }
 </section>
 
 <main>
-  <section class="pillar read" id="read">
+  <section class="pillar read" id="understanding">
     <div class="wrap">
       <div class="pillar-head">
-        <span class="tag">Read the room</span>
+        <span class="tag">Social Understanding</span>
         <p>Understanding multi-party interaction: who is addressing whom, what each person knows, when a claim is a lie, and what behaviour actually reveals about someone.</p>
       </div>
       <div class="papers">
@@ -386,10 +390,10 @@ footer p { margin: 0; }
     </div>
   </section>
 
-  <section class="pillar create" id="create">
+  <section class="pillar create" id="generation">
     <div class="wrap">
       <div class="pillar-head">
-        <span class="tag">Create the scene</span>
+        <span class="tag">Social Generation</span>
         <p>Generating video in which several people interact exactly as directed, and characters that respond when a viewer engages with them.</p>
       </div>
       <div class="papers">
@@ -432,10 +436,10 @@ footer p { margin: 0; }
     </div>
   </section>
 
-  <section class="pillar join" id="join">
+  <section class="pillar join" id="agents">
     <div class="wrap">
       <div class="pillar-head">
-        <span class="tag">Join the conversation</span>
+        <span class="tag">Social Agents</span>
         <p>Agents that take part in conversations themselves, and reach outcomes that work for everyone involved.</p>
       </div>
       <div class="papers">
@@ -486,7 +490,7 @@ footer p { margin: 0; }
 
 <footer>
   <div class="wrap">
-    <p>Sato Lab, Institute of Industrial Science, The University of Tokyo</p>
+    <p>UT-Vision Lab, Institute of Industrial Science, The University of Tokyo</p>
     <p>Last updated October 2026</p>
   </div>
 </footer>

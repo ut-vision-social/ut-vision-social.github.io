@@ -1,6 +1,6 @@
-# The Social Table
+# Social Intelligence @ UT-Vision
 
-Project hub for social intelligence research at Sato Lab, The University of Tokyo.
+Project hub for social intelligence research at UT-Vision Lab, The University of Tokyo.
 
 Live site: https://ut-vision-social.github.io/
 
