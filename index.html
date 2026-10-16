@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Social Table · Sato Lab</title>
+<meta name="description" content="Social intelligence research at Sato Lab, The University of Tokyo: AI that understands, creates, and joins human interaction.">
+<link rel="canonical" href="https://ut-vision-social.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Social Table">
+<meta property="og:title" content="The Social Table · Sato Lab, The University of Tokyo">
+<meta property="og:description" content="Social intelligence research at Sato Lab, The University of Tokyo: AI that understands, creates, and joins human interaction.">
+<meta property="og:url" content="https://ut-vision-social.github.io/">
+<meta property="og:image" content="https://ut-vision-social.github.io/images/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ut-vision-social.github.io/images/og.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Kalam:wght@400&display=swap">
+<style>
+/* Layout: a round-table hero where each seated figure stands for one project, then three
+   bands that follow an interaction from the outside in (understand it, generate it, take part
+   in it). Every project is the same row: its own figure beside a short account of the work.
+   Shape grammar: pills = status and links; 22px cards = projects; speech bubbles = voices. */
+:root {
+  --paper: #f4f6fb;
+  --surface: #ffffff;
+  --sunk: #eceff7;
+  --ink: #1b2137;
+  --muted: #5a6280;
+  --line: #dde2ee;
+  --read: #2b5ba8;
+  --create: #cc4c35;
+  --join: #c99514;
+  --join-ink: #2a2003;
+  --on-accent: #ffffff;
+  --skin: #ffe2cc;
+  --cheek: #f4a19c;
+  --face: #1b2137;
+
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Literata", "Iowan Old Style", Georgia, serif;
+  --hand: "Kalam", "Bradley Hand", "Segoe Print", cursive;
+
+  --t-xs: 0.78rem;
+  --t-sm: 0.88rem;
+  --t-md: 1.02rem;
+  --t-lg: 1.28rem;
+  --t-xl: 1.75rem;
+  --t-hero: clamp(2.7rem, 6.2vw, 4.6rem);
+
+  --r-card: 22px;
+  --r-inner: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #11152a; --surface: #191e36; --sunk: #141932; --ink: #eceef7; --muted: #a3aac6; --line: #2b3253;
+    --read: #8aaef4; --create: #f2927c; --join: #f0c75c; --join-ink: #2a2003; --on-accent: #11152a;
+    --skin: #f2d1bb;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #11152a; --surface: #191e36; --sunk: #141932; --ink: #eceef7; --muted: #a3aac6; --line: #2b3253;
+  --read: #8aaef4; --create: #f2927c; --join: #f0c75c; --join-ink: #2a2003; --on-accent: #11152a;
+  --skin: #f2d1bb;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--t-md);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--read); outline-offset: 3px; border-radius: 8px; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.label {
+  font-family: var(--display); font-weight: 600; font-size: var(--t-xs);
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ---------- top bar ---------- */
+.bar { padding-block: 20px; }
+.bar .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
+.mark { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: var(--t-md); text-decoration: none; letter-spacing: -0.01em; }
+.mark-dots { display: inline-flex; gap: 3px; }
+.mark-dots i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+.bar nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.bar nav a {
+  font-family: var(--display); font-weight: 600; font-size: var(--t-sm);
+  text-decoration: none; padding: 5px 12px; border-radius: 999px; color: var(--muted);
+}
+.bar nav a:hover { color: var(--ink); background: var(--surface); }
+
+/* ---------- hero ---------- */
+.hero { padding-block: 24px 64px; }
+.hero .wrap { display: grid; grid-template-columns: 1fr 1.05fr; gap: 28px 56px; align-items: center; }
+.eyebrow { margin: 0 0 18px; }
+.eyebrow a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--line); }
+.eyebrow a:hover { color: var(--ink); border-color: var(--ink); }
+.hero h1 {
+  font-family: var(--display); font-weight: 800; font-size: var(--t-hero);
+  line-height: 0.96; letter-spacing: -0.025em; margin: 0 0 22px; text-wrap: balance;
+}
+.hero h1 span { display: block; color: var(--muted); font-weight: 600; font-size: 0.42em; letter-spacing: -0.01em; margin-top: 14px; line-height: 1.2; }
+.lede { margin: 0 0 26px; max-width: 33em; }
+.trio { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.trio a {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--display); font-weight: 700; font-size: var(--t-sm);
+  text-decoration: none; padding: 7px 15px 7px 9px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line); transition: border-color .15s;
+}
+.trio a:hover { border-color: var(--ink); }
+.dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex: none; }
+.dot.read, .mark-dots .read { background: var(--read); }
+.dot.create, .mark-dots .create { background: var(--create); }
+.dot.join, .mark-dots .join { background: var(--join); }
+
+/* the table illustration */
+.stage { position: relative; width: 100%; max-width: 540px; justify-self: center; padding-top: 40px; }
+.stage svg { width: 100%; height: auto; display: block; }
+.seat { cursor: pointer; }
+.seat .bob { animation: bob 3.4s ease-in-out infinite; transform-box: fill-box; }
+.seat .head { transition: stroke .2s; }
+.seat:hover .head, .seat:focus-visible .head, .seat.is-talking .head { stroke: var(--ink); }
+.seat:focus { outline: none; }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.say {
+  position: absolute; transform: translate(-50%, calc(-100% - 12px));
+  font-family: var(--hand); font-size: 1.06rem; line-height: 1.25; white-space: nowrap;
+  background: var(--surface); color: var(--ink); border: 2px solid var(--ink);
+  padding: 7px 14px 6px; border-radius: 18px; pointer-events: none;
+  transition: left .35s ease, top .35s ease;
+}
+.say::after {
+  content: ""; position: absolute; left: var(--tail, 50%); bottom: -9px; width: 14px; height: 14px;
+  background: var(--surface); border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+  transform: translateX(-50%) rotate(45deg);
+}
+.say small { display: block; font-family: var(--display); font-weight: 600; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.stage-note { text-align: center; margin: 14px 0 0; }
+
+/* ---------- pillars ---------- */
+.pillar { padding-block: 56px 8px; }
+.pillar + .pillar { padding-top: 64px; }
+.pillar-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 24px; align-items: end; margin-bottom: 30px; }
+.tag {
+  position: relative; display: inline-block; font-family: var(--display); font-weight: 800; font-size: var(--t-xl);
+  line-height: 1; padding: 13px 22px 14px; border-radius: 22px; color: var(--on-accent); white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.tag::after {
+  content: ""; position: absolute; left: 24px; bottom: -7px; width: 16px; height: 16px;
+  background: inherit; transform: rotate(45deg); border-radius: 3px;
+}
+.read .tag { background: var(--read); }
+.create .tag { background: var(--create); }
+.join .tag { background: var(--join); color: var(--join-ink); }
+.pillar-head p { margin: 0; max-width: 42em; color: var(--muted); padding-bottom: 4px; }
+
+.papers { display: grid; gap: 20px; }
+.paper {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px 34px;
+  padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
+  scroll-margin-top: 24px; transition: border-color .2s;
+}
+.paper:hover { border-color: color-mix(in srgb, var(--ink) 30%, var(--line)); }
+.paper:target { border-color: var(--ink); }
+.fig {
+  margin: 0; background: #fff; border-radius: var(--r-inner); border: 1px solid var(--line);
+  padding: 10px; display: flex; align-items: center; justify-content: center; align-self: start;
+}
+.fig img { width: 100%; height: auto; display: block; border-radius: 6px; }
+.fig.soon { background: var(--sunk); border-style: dashed; padding: 44px 24px; align-self: stretch; }
+.soon-bubble {
+  position: relative; font-family: var(--hand); font-size: 1.32rem; line-height: 1.3; color: #1b2137;
+  background: #fff; border: 2px solid #1b2137; border-radius: 20px; padding: 14px 22px; max-width: 17em; text-align: center;
+}
+.soon-bubble::after {
+  content: ""; position: absolute; left: 32px; bottom: -9px; width: 15px; height: 15px;
+  background: #fff; border-right: 2px solid #1b2137; border-bottom: 2px solid #1b2137; transform: rotate(45deg);
+}
+
+.body { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding-block: 2px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.venue {
+  font-family: var(--display); font-weight: 700; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 11px; border-radius: 999px; border: 1.5px solid currentColor; line-height: 1.5;
+}
+.venue.won { border-color: transparent; color: var(--on-accent); }
+.read .venue.won { background: var(--read); }
+.create .venue.won { background: var(--create); }
+.join .venue.won { background: var(--join); color: var(--join-ink); }
+.venue.open { color: var(--muted); }
+.venue.soon { color: var(--muted); border-style: dashed; }
+.arx { font-family: var(--display); font-size: var(--t-xs); color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }
+.paper h3 { font-family: var(--display); font-weight: 700; font-size: var(--t-lg); line-height: 1.24; margin: 0; text-wrap: balance; letter-spacing: -0.005em; }
+.authors { margin: 0; font-size: var(--t-sm); color: var(--muted); line-height: 1.55; }
+.sum { margin: 0; max-width: 38em; }
+.finding {
+  margin: 2px 0 4px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start;
+  font-size: var(--t-sm); line-height: 1.5;
+}
+.finding svg { width: 22px; height: 20px; margin-top: 1px; }
+.read .finding svg { color: var(--read); }
+.create .finding svg { color: var(--create); }
+.join .finding svg { color: var(--join); }
+.finding b { font-family: var(--display); font-weight: 700; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 4px; }
+.links a, .links span {
+  font-family: var(--display); font-weight: 700; font-size: var(--t-sm); text-decoration: none;
+  padding: 6px 15px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--surface);
+  transition: background .15s, color .15s;
+}
+.links a:hover { background: var(--ink); color: var(--surface); }
+.links span { border-style: dashed; border-color: var(--line); color: var(--muted); }
+
+/* ---------- contact ---------- */
+.contact { padding-block: 72px 24px; }
+.contact-card {
+  display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 28px 48px; align-items: start;
+  padding: 34px; border-radius: var(--r-card); background: var(--ink); color: var(--paper);
+}
+.contact-card h2 { font-family: var(--display); font-weight: 800; font-size: var(--t-xl); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.01em; }
+.contact-card > div > p { margin: 0; color: color-mix(in srgb, var(--paper) 78%, var(--ink)); max-width: 30em; }
+.people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.person {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; align-items: center;
+  padding: 16px; border-radius: var(--r-inner); background: color-mix(in srgb, var(--paper) 9%, var(--ink));
+}
+.avatar { grid-row: span 3; width: 46px; height: 46px; }
+.person strong { font-family: var(--display); font-weight: 700; font-size: var(--t-md); }
+.person .role { font-size: var(--t-sm); color: color-mix(in srgb, var(--paper) 70%, var(--ink)); }
+.person .acts { display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: var(--display); font-weight: 600; font-size: var(--t-sm); }
+.person .acts a { text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--paper) 40%, var(--ink)); }
+.person .acts a:hover { border-color: var(--paper); }
+.person .mail { overflow-wrap: anywhere; }
+
+footer { padding-block: 28px 48px; color: var(--muted); font-size: var(--t-sm); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; }
+footer p { margin: 0; }
+
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .stage { max-width: 500px; }
+  .paper { grid-template-columns: 1fr; }
+  .contact-card { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .pillar-head { grid-template-columns: 1fr; }
+  .paper { padding: 16px; border-radius: 18px; }
+  .people { grid-template-columns: 1fr; }
+  .contact-card { padding: 24px 20px; }
+  .say { font-size: 0.95rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .seat .bob { animation: none; }
+  .say { transition: none; }
+}
+</style>
+
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top"><span class="mark-dots" aria-hidden="true"><i class="read"></i><i class="create"></i><i class="join"></i></span>The Social Table</a>
+    <nav aria-label="Sections">
+      <a href="#read">Read</a>
+      <a href="#create">Create</a>
+      <a href="#join">Join</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow label">Social intelligence research · <a href="https://www.ut-vision.org/">Sato Lab, The University of Tokyo</a></p>
+      <h1>The Social Table<span>AI that understands, creates, and joins human interaction</span></h1>
+      <p class="lede">Everyday social life happens between several people at once. We infer what others know and intend, notice when something does not add up, and settle on plans together. This research line studies how multimodal AI can understand such interaction, generate it faithfully, and take part in it.</p>
+      <ul class="trio">
+        <li><a href="#read"><span class="dot read"></span>Read the room</a></li>
+        <li><a href="#create"><span class="dot create"></span>Create the scene</a></li>
+        <li><a href="#join"><span class="dot join"></span>Join the conversation</a></li>
+      </ul>
+    </div>
+    <div class="stage" id="stage">
+      <svg id="tableSvg" viewBox="0 0 480 372" role="group" aria-label="Seven figures seated around a table, one for each project"></svg>
+      <div class="say" id="say" aria-hidden="true" style="left:30%;top:22%"><small>Multi-speaker Attention</small>Who's talking to whom?</div>
+      <p class="stage-note label">Select a seat to view its project</p>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="pillar read" id="read">
+    <div class="wrap">
+      <div class="pillar-head">
+        <span class="tag">Read the room</span>
+        <p>Understanding multi-party interaction: who is addressing whom, what each person knows, when a claim is a lie, and what behaviour actually reveals about someone.</p>
+      </div>
+      <div class="papers">
+
+        <article class="paper" id="msaa">
+          <figure class="fig"><img src="images/2026-social-interaction.webp" alt="Overview of multi-speaker attention alignment, linking each speaker's visual tokens to their utterances inside an MLLM" loading="lazy" width="1200" height="602"></figure>
+          <div class="body">
+            <div class="meta"><span class="venue won">CVPR 2026</span><span class="arx">arXiv 2511.17952</span></div>
+            <h3>Multi-speaker Attention Alignment for Multimodal Social Interaction</h3>
+            <p class="authors">Liangyang Ouyang, Yifei Huang, Mingfang Zhang, Caixin Kang, Ryosuke Furuta, Yoichi Sato</p>
+            <p class="sum">In multi-speaker scenes, MLLMs struggle to associate each person's appearance with what they say. We identify the attention heads responsible for cross-modal grounding and inject a social-aware attention bias derived from speaker locations, without any additional training.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>State of the art</b> on four social tasks across TVQA+, MMSI, and OnlineMMSI, with LLaVA-NeXT-Video, Qwen2.5-VL, and InternVL3.</span></p>
+            <div class="links">
+              <a href="https://arxiv.org/abs/2511.17952">Paper</a>
+              <a href="https://github.com/ut-vision/SocialInteraction">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper" id="mida">
+          <figure class="fig"><img src="images/2026-read-the-room.webp" alt="MIDA overview: Werewolf game clips labelled NEUTRAL, FALSE, and TRUE, the annotation pipeline, evaluated MLLMs, and the SoCoT and DSEM modules" loading="lazy" width="1200" height="574"></figure>
+          <div class="body">
+            <div class="meta"><span class="venue won">EMNLP 2026 Main</span><span class="arx">arXiv 2511.16221</span></div>
+            <h3>Can MLLMs Read the Room? A Multimodal Benchmark for Assessing Deception in Multi-Party Social Interactions</h3>
+            <p class="authors">Caixin Kang, Yifei Huang, Liangyang Ouyang, Mingfang Zhang, Ruicong Liu, Yoichi Sato</p>
+            <p class="sum">MIDA asks whether each statement in a game of One Night Ultimate Werewolf is true, false, or neutral, with ground truth reconstructed from manually annotated night actions. We benchmark 12 MLLMs and introduce Social Chain-of-Thought reasoning with a Dynamic Social Epistemic Memory.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>2,360 statements</b> with verifiable labels; even GPT-4o struggles to separate truth from deception.</span></p>
+            <div class="links">
+              <a href="https://arxiv.org/abs/2511.16221">Paper</a>
+              <a href="https://github.com/kkkcx/Can-MLLMs-Read-the-Room">Code</a>
+              <a href="https://huggingface.co/datasets/Ukpkmkkk/MIDA">Dataset</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper" id="mmocean">
+          <figure class="fig"><img src="images/2026-mm-ocean.webp" alt="MM-OCEAN overview: grounded personality reasoning through rating, reasoning, and grounding" loading="lazy" width="1200" height="725"></figure>
+          <div class="body">
+            <div class="meta"><span class="venue open">Under review</span><span class="arx">arXiv 2605.22109</span></div>
+            <h3>Perception or Prejudice: Can MLLMs Go Beyond First Impressions of Personality?</h3>
+            <p class="authors">Caixin Kang*, Tianyu Yan*, Sitong Gong*, Mingfang Zhang, Liangyang Ouyang, Ruicong Liu, Bo Zheng, Huchuan Lu, Kaipeng Zhang, Yoichi Sato, Yifei Huang</p>
+            <p class="sum">Grounded Personality Reasoning requires a model to support each Big Five rating with observable behaviour. MM-OCEAN provides 1,104 videos and 5,320 cue-grounding questions, and a three-tier evaluation of 27 MLLMs.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>51% of correct ratings</b> are not grounded in any retrieved behavioural cue.</span></p>
+            <div class="links">
+              <a href="https://arxiv.org/abs/2605.22109">Paper</a>
+              <a href="https://github.com/kkkcx/MM-OCEAN">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper" id="honeyed">
+          <figure class="fig soon"><div class="soon-bubble">“What a wonderful idea. Truly.”</div></figure>
+          <div class="body">
+            <div class="meta"><span class="venue soon">Coming soon</span></div>
+            <h3>Honeyed Words, Hidden Daggers: Benchmarking and Training LLMs to See Through Mock Politeness</h3>
+            <p class="sum">Courteous wording can carry criticism, sarcasm, or hostility. This work introduces a benchmark for mock politeness and a training approach that helps LLMs recognise what polite language is actually doing.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>Paper and data</b> will be released soon.</span></p>
+            <div class="links"><span>Paper soon</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="pillar create" id="create">
+    <div class="wrap">
+      <div class="pillar-head">
+        <span class="tag">Create the scene</span>
+        <p>Generating video in which several people interact exactly as directed, and characters that respond when a viewer engages with them.</p>
+      </div>
+      <div class="papers">
+
+        <article class="paper" id="socialdirector">
+          <figure class="fig"><img src="images/2026-social-director.webp" alt="SocialDirector controls who does what, toward whom, and when in generated multi-person videos" loading="lazy" width="1200" height="693"></figure>
+          <div class="body">
+            <div class="meta"><span class="venue won">NeurIPS 2026</span><span class="arx">arXiv 2605.10079</span></div>
+            <h3>SocialDirector: Training-Free Social Interaction Control for Multi-Person Video Generation</h3>
+            <p class="authors">Liangyang Ouyang, Ruicong Liu, Caixin Kang, Yifei Huang, Yoichi Sato</p>
+            <p class="sum">Video generators often assign an action to the wrong person or direct it at the wrong target. Social Actor Masking binds each person to their own description, and Directional Reweighting steers each action toward its intended target, both by modulating cross-attention.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>Training-free control</b> of who acts, toward whom, and when, across several video generation models.</span></p>
+            <div class="links">
+              <a href="https://arxiv.org/abs/2605.10079">Paper</a>
+              <span>Code soon</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper" id="helloworld">
+          <figure class="fig"><img src="images/2026-helloworld.webp" alt="HelloWorld: pressing a button makes the on-screen character turn toward the viewer and greet them" loading="lazy" width="1200" height="480"></figure>
+          <div class="body">
+            <div class="meta"><span class="venue open">Preprint</span><span class="arx">arXiv 2608.05070</span></div>
+            <h3>HelloWorld: Enabling Socially Interactive Characters in Video World Models</h3>
+            <p class="authors">Liangyang Ouyang, Ruicong Liu, Xuangeng Chu, Kaipeng Zhang, Yoichi Sato</p>
+            <p class="sum">A video world model with characters that respond to the viewer. At the press of a button, the on-screen character turns to the camera, waves, nods, or greets the viewer, while the camera continues to follow user control.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>HelloWorldBench</b>, 400 samples scored on three social interaction metrics and three visual quality metrics.</span></p>
+            <div class="links">
+              <a href="https://arxiv.org/abs/2608.05070">Paper</a>
+              <a href="https://github.com/AlayaLab/HelloWorld">Project page</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="pillar join" id="join">
+    <div class="wrap">
+      <div class="pillar-head">
+        <span class="tag">Join the conversation</span>
+        <p>Agents that take part in conversations themselves, and reach outcomes that work for everyone involved.</p>
+      </div>
+      <div class="papers">
+
+        <article class="paper" id="hico">
+          <figure class="fig"><img src="images/2026-social-agent.webp" alt="HICO-Bench example: assuming what Maya needs fails, while clarifying first leads to a verified plan in both possible worlds" loading="lazy" width="1200" height="523"></figure>
+          <div class="body">
+            <div class="meta"><span class="venue open">Preprint</span><span class="arx">arXiv 2610.20195</span></div>
+            <h3>What Makes a Social Agent’s Interactions Effective? Learning from Verifiable Outcomes in Paired Worlds</h3>
+            <p class="authors">Caixin Kang, Ke Wang, Yuchuan Wu, Xiaoqiang Wang, Ling Li, Bingxue Qiu, Yongbin Li, Yoichi Sato</p>
+            <p class="sum">HICO-Bench pairs two agents holding private information across 180 everyday coordination scenarios and verifies whether the plan they agree on actually works. Paired-Credit Policy Optimization learns from these verified outcomes turn by turn.</p>
+            <p class="finding"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M3 2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/></svg><span><b>36% of conversations</b> rated highly for goal completion still fail verification; PaCPO lifts Qwen3-8B from 20.4% to 28.3%.</span></p>
+            <div class="links">
+              <a href="https://arxiv.org/abs/2610.20195">Paper</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <div>
+          <h2>Pull up a chair</h2>
+          <p>We welcome questions about these projects, research collaborations, and students interested in social intelligence. Please get in touch with either of us.</p>
+        </div>
+        <div class="people">
+          <div class="person">
+            <svg class="avatar" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="23" fill="var(--create)"/><circle cx="23" cy="20" r="11" fill="var(--skin)"/><path d="M12 19a11 11 0 0 1 22 0q-11-6-22 0z" fill="var(--face)" opacity=".85"/><circle cx="19" cy="21" r="1.4" fill="var(--face)"/><circle cx="27" cy="21" r="1.4" fill="var(--face)"/><path d="M20 25q3 2.4 6 0" stroke="var(--face)" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+            <strong>Liangyang Ouyang</strong>
+            <span class="role">The University of Tokyo</span>
+            <span class="acts"><a href="https://www.ut-vision.org/authors/liangyang-ouyang/">Profile</a></span>
+          </div>
+          <div class="person">
+            <svg class="avatar" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="23" fill="var(--read)"/><circle cx="23" cy="20" r="11" fill="var(--skin)"/><path d="M12 19a11 11 0 0 1 22 0q-11-6-22 0z" fill="var(--face)" opacity=".85"/><circle cx="19" cy="21" r="1.4" fill="var(--face)"/><circle cx="27" cy="21" r="1.4" fill="var(--face)"/><path d="M20 25q3 2.4 6 0" stroke="var(--face)" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+            <strong>Caixin Kang</strong>
+            <span class="role">The University of Tokyo</span>
+            <span class="acts"><a href="https://kkkcx.github.io/">Homepage</a><a class="mail" href="mailto:cxkang@iis.u-tokyo.ac.jp">cxkang@iis.u-tokyo.ac.jp</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Sato Lab, Institute of Industrial Science, The University of Tokyo</p>
+    <p>Last updated October 2026</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const SEATS = [
+    { id: "msaa",           short: "Multi-speaker Attention", line: "Who's talking to whom?",         group: "read" },
+    { id: "mida",           short: "Read the Room",           line: "Wait, are you lying?",           group: "read" },
+    { id: "mmocean",        short: "Perception or Prejudice", line: "Is that a first impression?",    group: "read" },
+    { id: "honeyed",        short: "Honeyed Words",           line: "Oh, how very kind of you.",      group: "read" },
+    { id: "socialdirector", short: "SocialDirector",          line: "Places, everyone. Action!",      group: "create" },
+    { id: "helloworld",     short: "HelloWorld",              line: "Oh, hi there!",                  group: "create" },
+    { id: "hico",           short: "Paired Worlds",           line: "What do you need, exactly?",     group: "join" },
+  ];
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("tableSvg");
+  const say = document.getElementById("say");
+  const stage = document.getElementById("stage");
+  const W = 480, H = 372, cx = 240, cy = 190, rx = 176, ry = 84;
+  const el = (tag, attrs, parent) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  };
+
+  const seats = SEATS.map((s, i) => {
+    const a = Math.PI * (1.12 + (2 * i) / SEATS.length);
+    return { ...s, x: cx + (rx + 24) * Math.cos(a), y: cy + (ry + 28) * Math.sin(a), front: Math.sin(a) > 0.05 };
+  });
+
+  const drawSeat = (s, i) => {
+    const g = el("a", { href: "#" + s.id, class: "seat", "aria-label": s.short }, svg);
+    const bob = el("g", { class: "bob", style: `animation-delay:${-i * 0.45}s` }, g);
+    el("path", { d: `M${s.x - 28} ${s.y + 54} q0 -34 28 -34 q28 0 28 34z`, fill: `var(--${s.group})` }, bob);
+    el("circle", { class: "head", cx: s.x, cy: s.y, r: 20, fill: "var(--skin)", stroke: "transparent", "stroke-width": 2.5 }, bob);
+    el("path", { d: `M${s.x - 20} ${s.y - 1} a20 20 0 0 1 40 0 q-20 -11 -40 0z`, fill: "var(--face)", opacity: 0.82 }, bob);
+    el("circle", { cx: s.x - 7, cy: s.y + 3, r: 2.3, fill: "var(--face)" }, bob);
+    el("circle", { cx: s.x + 7, cy: s.y + 3, r: 2.3, fill: "var(--face)" }, bob);
+    el("path", { d: `M${s.x - 5.5} ${s.y + 10} q5.5 4.5 11 0`, fill: "none", stroke: "var(--face)", "stroke-width": 2, "stroke-linecap": "round" }, bob);
+    el("circle", { cx: s.x - 12, cy: s.y + 9, r: 3, fill: "var(--cheek)", opacity: 0.75 }, bob);
+    el("circle", { cx: s.x + 12, cy: s.y + 9, r: 3, fill: "var(--cheek)", opacity: 0.75 }, bob);
+    return g;
+  };
+
+  const nodes = [];
+  seats.forEach((s, i) => { if (!s.front) nodes[i] = drawSeat(s, i); });
+  el("ellipse", { cx, cy: cy + 9, rx, ry, fill: "var(--line)" }, svg);
+  el("ellipse", { cx, cy, rx, ry, fill: "var(--surface)", stroke: "var(--line)", "stroke-width": 2 }, svg);
+  el("ellipse", { cx, cy, rx: rx - 22, ry: ry - 12, fill: "none", stroke: "var(--line)", "stroke-width": 1.5, "stroke-dasharray": "2 6", "stroke-linecap": "round" }, svg);
+  [[-64, -12, -12, "read"], [-20, 12, 6, "create"], [26, -10, -4, "join"], [70, 12, 14, "read"]].forEach(([dx, dy, rot, c]) => {
+    const g = el("g", { transform: `rotate(${rot} ${cx + dx} ${cy + dy})` }, svg);
+    el("rect", { x: cx + dx - 13, y: cy + dy - 18, width: 26, height: 36, rx: 4, fill: "var(--paper)", stroke: "var(--muted)", "stroke-width": 1.4 }, g);
+    el("circle", { cx: cx + dx, cy: cy + dy, r: 5, fill: `var(--${c})`, opacity: 0.8 }, g);
+  });
+  seats.forEach((s, i) => { if (s.front) nodes[i] = drawSeat(s, i); });
+
+  let current = 0, timer = null;
+  const show = (i) => {
+    current = i;
+    const s = seats[i];
+    nodes.forEach((n, j) => n.classList.toggle("is-talking", j === i));
+    say.replaceChildren();
+    const small = document.createElement("small");
+    small.textContent = s.short;
+    say.append(small, document.createTextNode(s.line));
+    const sw = svg.clientWidth, sh = svg.clientHeight, stageW = stage.clientWidth;
+    const px = svg.offsetLeft + (s.x / W) * sw;
+    const py = svg.offsetTop + ((s.y - 22) / H) * sh;
+    const half = say.offsetWidth / 2;
+    const left = Math.min(Math.max(px, half + 2), stageW - half - 2);
+    say.style.left = left + "px";
+    say.style.top = py + "px";
+    say.style.setProperty("--tail", (px - left + half) + "px");
+  };
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const start = () => { if (!reduce && !timer) timer = setInterval(() => show((current + 1) % seats.length), 2800); };
+  const stop = () => { clearInterval(timer); timer = null; };
+
+  nodes.forEach((n, i) => {
+    n.addEventListener("mouseenter", () => { stop(); show(i); });
+    n.addEventListener("focus", () => { stop(); show(i); });
+    n.addEventListener("mouseleave", start);
+    n.addEventListener("blur", start);
+  });
+  window.addEventListener("resize", () => show(current));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => show(current));
+  show(0);
+  start();
+})();
+</script>
+
+</body>
+</html>
